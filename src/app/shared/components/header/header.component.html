@@ -1,0 +1,14 @@
+<header>
+  <div class="container">
+    <nav mat-tab-nav-bar>
+      <a *ngFor="let item of menuItems"
+        mat-tab-link
+        [routerLink]="item.link"
+        routerLinkActive
+        #rla="routerLinkActive"
+        [active]="rla.isActive">
+        {{ item.name }}
+      </a>
+    </nav>
+  </div>
+</header>
