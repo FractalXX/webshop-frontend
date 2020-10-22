@@ -1,38 +1,47 @@
-<div fxLayout="row"
+<div class="page-header" 
+  fxLayout="row"
   fxLayout.lt-md="column"
   fxLayoutAlign="space-between center">
   <h1>Products</h1>
   <form #filterForm="ngForm"
-    fxLayout="row"
-    fxLayout.lt-md="column"
-    fxLayoutAlign="start center"
-    fxLayoutGap="20px"
     (submit)="updateQuery()">
-    <mat-checkbox #outOfStockIndicator
-      (change)="onOutOfStockIndicatorChanged($event)">
-      Show out of stock items
-    </mat-checkbox>
-    <app-simple-input
-      name="quantityFrom"
-      [(ngModel)]="filterFormModel.quantityFrom"
-      [disabled]="outOfStockIndicator.checked"
-      label="Min. quantity"
-      hint="Inclusive. Must be at least zero."
-      type="number"
-    ></app-simple-input>
-    <app-simple-input
-      name="quantityTo"
-      [(ngModel)]="filterFormModel.quantityTo"
-      [disabled]="outOfStockIndicator.checked"
-      label="Max. quantity"
-      hint="Inclusive. Must be at least zero."
-      type="number"
-    ></app-simple-input>
-    <button mat-raised-button
-      type="submit"
-      color="primary">
-      Filter
-    </button>
+    <div fxFlex
+      fxLayout="row wrap"
+      fxLayout.lt-sm="column"
+      fxLayoutAlign="start center"
+      fxLayoutAlign.lt-md="space-between center"
+      fxLayoutGap="20px">
+      <mat-checkbox #outOfStockIndicator
+        fxFlex="auto"
+        fxFlex.lt-md="100%"
+        color="primary"
+        (change)="onOutOfStockIndicatorChanged($event)">
+        Show out of stock items
+      </mat-checkbox>
+      <app-simple-input
+        fxFlex="1 1 auto"
+        name="quantityFrom"
+        [(ngModel)]="filterFormModel.quantityFrom"
+        [disabled]="outOfStockIndicator.checked"
+        label="Min. quantity"
+        hint="Inclusive. Must be at least zero."
+        type="number"
+      ></app-simple-input>
+      <app-simple-input
+        fxFlex="1 1 auto"
+        name="quantityTo"
+        [(ngModel)]="filterFormModel.quantityTo"
+        [disabled]="outOfStockIndicator.checked"
+        label="Max. quantity"
+        hint="Inclusive. Must be at least zero."
+        type="number"
+      ></app-simple-input>
+      <button mat-raised-button
+        type="submit"
+        color="primary">
+        Filter
+      </button>
+    </div>
   </form>
 </div>
 <mat-divider></mat-divider>

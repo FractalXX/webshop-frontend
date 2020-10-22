@@ -2,7 +2,7 @@ import { Directive, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 /**
- * Provides utilities to components that extend it.
+ * Provides utilities to components and directives that extend it.
  */
 @Directive()
 export abstract class BaseDirective implements OnDestroy {

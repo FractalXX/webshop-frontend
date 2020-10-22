@@ -3,7 +3,9 @@
     fxLayout="row"
     fxLayoutAlign="space-between center">
     <mat-card-title>{{ product.name }}</mat-card-title>
-    <mat-checkbox matTooltip="Add product to order"></mat-checkbox>
+    <mat-checkbox matTooltip="Add product to order"
+      color="primary"
+      [disabled]="product.quantity <= 0"></mat-checkbox>
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row">
