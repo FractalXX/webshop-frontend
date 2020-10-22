@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
-import { keys as _keys } from 'lodash';
+import { keys } from 'lodash-es';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { BaseDirective } from '../base/base.directive';
 
@@ -73,6 +73,6 @@ export class SimpleInputComponent
   }
 
   getFirstError(): string {
-    return _keys(this.control.errors)[0];
+    return keys(this.control.errors)[0];
   }
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, switchMap } from 'rxjs/operators';
 import Product from 'src/app/shared/interfaces/product.interface';
+import { QueryService } from 'src/app/shared/services/query.service';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -12,26 +12,37 @@ import { ProductService } from '../../services/product.service';
   styleUrls: ['./product-list-page.component.scss'],
 })
 export class ProductListPageComponent implements OnInit {
-  public filterFormGroup: FormGroup;
+  // Form will be template driven since it's easier to handle disabled states on the template this way
+  @ViewChild('filterForm') filterForm: NgForm;
+
+  public filterFormModel = {
+    quantityFrom: null,
+    quantityTo: null,
+  };
+
   public products$: Observable<Product[]>;
 
   constructor(
+    private queryService: QueryService,
     private productService: ProductService,
-    private route: ActivatedRoute,
-    formBuilder: FormBuilder,
-  ) {
-    this.filterFormGroup = formBuilder.group({
-      quantityFrom: [''],
-      quantityTo: [''],
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.products$ = this.route.queryParams.pipe(
-      distinctUntilChanged(),
-      switchMap((queryParams) => this.productService.getProducts(queryParams)),
+    this.products$ = this.queryService.buildQueryObservable((params) =>
+      this.productService.getProducts(params),
     );
   }
 
-  updateQuery(): void {}
+  onOutOfStockIndicatorChanged(event: MatCheckboxChange): void {
+    if (event.checked) {
+      this.filterForm.reset({
+        quantityFrom: 0,
+        quantityTo: 0,
+      });
+    }
+  }
+
+  updateQuery(): void {
+    this.queryService.updateCurrentQuery(this.filterFormModel);
+  }
 }

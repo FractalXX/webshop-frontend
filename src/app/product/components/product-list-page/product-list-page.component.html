@@ -2,27 +2,37 @@
   fxLayout.lt-md="column"
   fxLayoutAlign="space-between center">
   <h1>Products</h1>
-  <form [formGroup]="filterFormGroup"
+  <form #filterForm="ngForm"
     fxLayout="row"
     fxLayout.lt-md="column"
-    fxLayoutGap="20px">
+    fxLayoutAlign="start center"
+    fxLayoutGap="20px"
+    (submit)="updateQuery()">
+    <mat-checkbox #outOfStockIndicator
+      (change)="onOutOfStockIndicatorChanged($event)">
+      Show out of stock items
+    </mat-checkbox>
     <app-simple-input
-      formControlName="quantityFrom"
+      name="quantityFrom"
+      [(ngModel)]="filterFormModel.quantityFrom"
+      [disabled]="outOfStockIndicator.checked"
       label="Min. quantity"
       hint="Inclusive. Must be at least zero."
       type="number"
     ></app-simple-input>
     <app-simple-input
-      formControlName="quantityTo"
+      name="quantityTo"
+      [(ngModel)]="filterFormModel.quantityTo"
+      [disabled]="outOfStockIndicator.checked"
       label="Max. quantity"
       hint="Inclusive. Must be at least zero."
       type="number"
     ></app-simple-input>
     <button mat-raised-button
       type="submit"
-      color="primary"
-      (click)="updateQuery()"
-    ></button>
+      color="primary">
+      Filter
+    </button>
   </form>
 </div>
 <mat-divider></mat-divider>

@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
@@ -19,14 +20,15 @@ import { ApiHttpClient } from './utils/api-http-client';
 import createApiHttpClient from './utils/api-http-client-factory';
 
 const materialModules = [
-  MatTabsModule,
+  MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
   MatDividerModule,
+  MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatTabsModule,
   MatTooltipModule,
-  MatFormFieldModule,
 ];
 
 const commonModules = [FormsModule, ReactiveFormsModule, RouterModule];
