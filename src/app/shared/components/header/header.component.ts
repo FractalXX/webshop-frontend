@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { AppRouteNames } from 'src/app/app-route-names.enum';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
   public readonly menuItems = [
     {
       name: 'Products',
-      link: '/products',
+      link: `/${AppRouteNames.PRODUCTS}`,
     },
     {
       name: 'Customers',
-      link: '/customers',
+      link: `/${AppRouteNames.CUSTOMERS}`,
+    },
+    {
+      name: 'Orders',
+      link: `/${AppRouteNames.ORDERS}`,
     },
   ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

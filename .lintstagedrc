@@ -1,0 +1,10 @@
+{
+  "src/**/*.ts": [
+    "prettier --write",
+    "tslint --project .",
+    "git add"
+  ],
+  "src/**/*.scss": [
+    "stylelint"
+  ]
+}

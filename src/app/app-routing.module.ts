@@ -1,27 +1,34 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { CustomerListPageComponent } from './customer/components/customer-list-page/customer-list-page.component';
-import { ProductListPageComponent } from './product/components/product-list-page/product-list-page.component';
+import { RouterModule, Routes } from '@angular/router';
+import { AppRouteNames } from './app-route-names.enum';
 
 const routes: Routes = [
   {
-    path: 'products',
-    // TODO configure module routing and lazy loading
-    component: ProductListPageComponent,
+    path: AppRouteNames.PRODUCTS,
+    loadChildren: () =>
+      import('./product/product.module').then((module) => module.ProductModule),
   },
   {
-    path: 'customers',
-    component: CustomerListPageComponent,
+    path: AppRouteNames.CUSTOMERS,
+    loadChildren: () =>
+      import('./customer/customer.module').then(
+        (module) => module.CustomerModule,
+      ),
+  },
+  {
+    path: AppRouteNames.ORDERS,
+    loadChildren: () =>
+      import('./order/order.module').then((module) => module.OrderModule),
   },
   {
     path: '',
-    redirectTo: 'products',
+    redirectTo: '/products',
     pathMatch: 'full',
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
