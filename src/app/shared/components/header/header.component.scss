@@ -1,0 +1,14 @@
+/* TODO fix relative path */
+@import '../variables';
+
+.app-header {
+  background-color: $app-primary;
+
+  .mat-tab-link {
+    color: white;
+  }
+
+  .mat-ink-bar {
+    background-color: white;
+  }
+}

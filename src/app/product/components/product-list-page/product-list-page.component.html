@@ -1,1 +1,47 @@
-<p>product-list-page works!</p>
+<div fxLayout="row"
+  fxLayout.lt-md="column"
+  fxLayoutAlign="space-between center">
+  <h1>Products</h1>
+  <form [formGroup]="filterFormGroup"
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutGap="20px">
+    <app-simple-input
+      formControlName="quantityFrom"
+      label="Min. quantity"
+      hint="Inclusive. Must be at least zero."
+      type="number"
+    ></app-simple-input>
+    <app-simple-input
+      formControlName="quantityTo"
+      label="Max. quantity"
+      hint="Inclusive. Must be at least zero."
+      type="number"
+    ></app-simple-input>
+    <button mat-raised-button
+      type="submit"
+      color="primary"
+      (click)="updateQuery()"
+    ></button>
+  </form>
+</div>
+<mat-divider></mat-divider>
+<ng-container *ngIf="products$ | async as products">
+  <div class="page-content"
+    *ngIf="products.length; else noResultTemplate"
+    gdColumns="repeat(4, 1fr)"
+    gdColumns.lt-xl="repeat(3, 1fr)"
+    gdColumns.lt-lg="repeat(2, 1fr)"
+    gdColumns.lt-md="1fr"
+    gdRows="auto"
+    gdGap="20px">
+    <app-product-card
+      class="product-card"
+      *ngFor="let product of products$ | async"
+      [product]="product"
+    ></app-product-card>
+  </div>
+  <ng-template #noResultTemplate>
+    No result
+  </ng-template>
+</ng-container>

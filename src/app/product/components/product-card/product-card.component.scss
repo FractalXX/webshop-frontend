@@ -1,0 +1,31 @@
+@import '../variables';
+
+.mat-card {
+  height: 100%;
+  padding: 0;
+
+  .mat-card-header,
+  .mat-card-content {
+    padding: 16px;
+  }
+
+  .mat-card-header {
+    border-bottom: 1px solid $mat-divider-grey;
+  }
+
+  .stock-indicator {
+    font-size: 16px;
+    text-align: center;
+
+    mat-icon {
+      font-size: 64px;
+      width: auto;
+      height: auto;
+    }
+  }
+
+  .price {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}

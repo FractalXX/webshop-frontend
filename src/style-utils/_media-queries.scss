@@ -1,0 +1,25 @@
+@import 'variables';
+
+@mixin lt-sm {
+  @media only screen and (max-width: $breakpoint-sm - 1) {
+    @content;
+  }
+}
+
+@mixin lt-md {
+  @media only screen and (max-width: $breakpoint-md - 1) {
+    @content;
+  }
+}
+
+@mixin lt-lg {
+  @media only screen and (max-width: $breakpoint-lg - 1) {
+    @content;
+  }
+}
+
+@mixin lt-xl {
+  @media only screen and (max-width: $breakpoint-xl - 1) {
+    @content;
+  }
+}

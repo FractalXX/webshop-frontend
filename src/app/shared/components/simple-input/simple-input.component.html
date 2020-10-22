@@ -1,0 +1,13 @@
+<mat-form-field>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    [formControl]="internalControl"
+    [required]="required"
+    [type]="type"
+  />
+  <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
+  <mat-error *ngIf="internalControl.errors && getFirstError() as error">
+    {{ error }}
+  </mat-error>
+</mat-form-field>
