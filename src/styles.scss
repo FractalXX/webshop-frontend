@@ -12,6 +12,12 @@ body {
   background: linear-gradient(90deg, rgba(224, 224, 224, 1) 0%, rgba(235, 235, 235, 1) 100%);
 }
 
+table {
+  th.mat-header-cell {
+    color: $app-primary;
+  }
+}
+
 .mat-select-value {
   max-width: 100%;
   width: auto;

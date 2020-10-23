@@ -5,6 +5,8 @@ import ProductOrder from './product-order.interface';
 export default interface Order {
   // FIXME: union type won't work on the template
   customer: any;
+  shippingInfo: any;
+  billingInfo: any;
   products: ProductOrder[];
   placedAt: Date;
   updatedAt?: Date;

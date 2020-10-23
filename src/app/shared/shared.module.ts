@@ -18,6 +18,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { HeaderComponent } from './components/header/header.component';
+import { SimpleAddressComponent } from './components/simple-address/simple-address.component';
 import { SimpleInputComponent } from './components/simple-input/simple-input.component';
 import { ApiHttpClient } from './utils/api-http-client';
 import createApiHttpClient from './utils/api-http-client-factory';
@@ -40,7 +41,7 @@ const materialModules = [
 const commonModules = [FormsModule, ReactiveFormsModule, RouterModule];
 
 @NgModule({
-  declarations: [HeaderComponent, SimpleInputComponent],
+  declarations: [HeaderComponent, SimpleInputComponent, SimpleAddressComponent],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -53,6 +54,7 @@ const commonModules = [FormsModule, ReactiveFormsModule, RouterModule];
     RouterModule,
     HeaderComponent,
     SimpleInputComponent,
+    SimpleAddressComponent,
     ...materialModules,
     ...commonModules,
   ],

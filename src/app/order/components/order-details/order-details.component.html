@@ -4,20 +4,51 @@
   fxLayoutGap="16px">
   <div fxFlex="50%"
     fxFlex.lt-md="auto">
-    <h2>Customer</h2>
-    <dl>
-      <dt>Name:</dt>
-      <dd>{{ order.customer.name }}</dd>
+    <ng-container *ngIf="order.customer as customer">
+      <h2>Customer</h2>
+      <dl>
+        <dt>Name:</dt>
+        <dd>{{ customer.name }}</dd>
+  
+        <dt>E-mail:</dt>
+        <dd>{{ customer.email }}</dd>
+  
+        <dt>Date of birth:</dt>
+        <dd>{{ customer.birthDate | date }}</dd>
+      </dl>
+    </ng-container>
 
-      <dt>E-mail:</dt>
-      <dd>{{ order.customer.email }}</dd>
-
-      <dt>Date of birth:</dt>
-      <dd>{{ order.customer.birthDate | date }}</dd>
-    </dl>
-
-    <h2>Billing info</h2>
-    <h2>Shipping info</h2>
+    <div fxLayout="row wrap">
+      <div *ngIf="order.billingInfo as billingInfo"
+        fxFlex="50%"
+        fxFlex.lt-md="100%">
+        <h2>Billing info</h2>
+        <dl>
+          <dt>Name:</dt>
+          <dd>{{ billingInfo.name }}</dd>
+  
+          <dt>Address:</dt>
+          <dd>
+            <app-simple-address [address]="billingInfo"></app-simple-address>
+          </dd>
+        </dl>
+      </div>
+  
+      <div *ngIf="order.shippingInfo as shippingInfo"
+        fxFlex="50%"
+        fxFlex.lt-md="100%">
+        <h2>Shipping info</h2>
+        <dl>
+          <dt>Name:</dt>
+          <dd>{{ shippingInfo.name }}</dd>
+  
+          <dt>Address:</dt>
+          <dd>
+            <app-simple-address [address]="shippingInfo"></app-simple-address>
+          </dd>
+        </dl>
+      </div>
+    </div>
   </div>
   <div fxFlex="50%"
     fxFlex.lt-md="auto">
