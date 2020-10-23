@@ -12,6 +12,11 @@ body {
   background: linear-gradient(90deg, rgba(224, 224, 224, 1) 0%, rgba(235, 235, 235, 1) 100%);
 }
 
+.mat-select-value {
+  max-width: 100%;
+  width: auto;
+}
+
 .success {
   color: $app-success;
 }
@@ -42,5 +47,6 @@ body {
 
   @include lt-sm {
     max-width: 100%;
+    margin: 0 16px;
   }
 }

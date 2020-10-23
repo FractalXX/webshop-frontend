@@ -7,7 +7,7 @@ import {
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { keys } from 'lodash-es';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { BaseDirective } from '../base/base.directive';
+import { BaseDirective } from '../../base/base.directive';
 
 @Component({
   selector: 'app-simple-input',
@@ -26,7 +26,7 @@ export class SimpleInputComponent
   implements OnInit, ControlValueAccessor {
   @Input() label: string;
   @Input() hint: string;
-  @Input() type: 'password' | 'number' | 'text' = 'text';
+  @Input() type: 'password' | 'number' | 'text' | 'email' = 'text';
   @Input() required = false;
 
   public internalControl = new FormControl();
