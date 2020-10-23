@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import Order from 'src/app/shared/interfaces/order.interface';
 
 @Component({
@@ -6,12 +6,8 @@ import Order from 'src/app/shared/interfaces/order.interface';
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.scss'],
 })
-export class OrderDetailsComponent implements OnInit {
+export class OrderDetailsComponent {
   @Input() order: Order;
 
   public productTableColumns = ['name', 'price', 'quantity'];
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

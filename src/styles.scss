@@ -12,6 +12,17 @@ body {
   background: linear-gradient(90deg, rgba(224, 224, 224, 1) 0%, rgba(235, 235, 235, 1) 100%);
 }
 
+.mat-snack-bar-container {
+  &.success {
+    color: white;
+    background-color: $app-success;
+  }
+
+  &.warn {
+    background-color: $app-warn;
+  }
+}
+
 table {
   th.mat-header-cell {
     color: $app-primary;
@@ -50,7 +61,7 @@ table {
 }
 
 .page-content {
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 .container {

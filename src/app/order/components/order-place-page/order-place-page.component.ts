@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { map, startWith, switchMap } from 'rxjs/operators';
+import { CustomerService } from 'src/app/customer/services/customer.service';
 import { BaseDirective } from 'src/app/shared/base/base.directive';
 import { PaymentMethod } from 'src/app/shared/enums/payment-method.enum';
+import OrderCreate from 'src/app/shared/interfaces/order-create.interface';
 import Order from 'src/app/shared/interfaces/order.interface';
-import { OrderService } from '../../services/order.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { OrderService } from '../../../shared/services/order.service';
 
 @Component({
   selector: 'app-order-place-page',
@@ -17,14 +21,21 @@ export class OrderPlacePageComponent extends BaseDirective implements OnInit {
 
   public personalInfoGroup: FormGroup;
   public shippingGroup: FormGroup;
-  public currentOrder$: Observable<Order>;
+  public currentOrder$: Observable<OrderCreate>;
+  public matchIndicator = false;
 
   public paymentMethodValues = [
     { label: 'Cash', value: PaymentMethod.CASH },
     { label: 'Bank transfer', value: PaymentMethod.BANK_TRANSFER },
   ];
 
-  constructor(formBuilder: FormBuilder, private orderService: OrderService) {
+  constructor(
+    formBuilder: FormBuilder,
+    private orderService: OrderService,
+    private customerService: CustomerService,
+    private notificationService: NotificationService,
+    private router: Router,
+  ) {
     super();
     this.personalInfoGroup = formBuilder.group({
       name: [''],
@@ -70,5 +81,22 @@ export class OrderPlacePageComponent extends BaseDirective implements OnInit {
       zipCode: [''],
       address: [''],
     });
+  }
+
+  placeOrder(): void {
+    const { billingInfo, shippingInfo } = this.shippingGroup.value;
+
+    // TODO create order
+    this.customerService
+      .createCustomer({
+        ...this.personalInfoGroup.value,
+        billingInfo: this.matchIndicator ? shippingInfo : billingInfo,
+        shippingInfos: [shippingInfo],
+      })
+      .pipe(switchMap(() => this.orderService.currentOrder$))
+      .subscribe(() => {
+        this.notificationService.notify('Order successfully created.');
+        this.router.navigateByUrl('/orders');
+      });
   }
 }

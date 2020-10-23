@@ -7,7 +7,7 @@ import { BaseDirective } from 'src/app/shared/base/base.directive';
 import { OrderStatus } from 'src/app/shared/enums/order-status.enum';
 import Order from 'src/app/shared/interfaces/order.interface';
 import { QueryService } from 'src/app/shared/services/query.service';
-import { OrderService } from '../../services/order.service';
+import { OrderService } from '../../../shared/services/order.service';
 
 @Component({
   selector: 'app-order-list-page',

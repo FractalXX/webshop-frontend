@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -40,6 +41,7 @@ const materialModules = [
   MatNativeDateModule,
   MatRippleModule,
   MatSelectModule,
+  MatSnackBarModule,
   MatStepperModule,
   MatTableModule,
   MatTabsModule,

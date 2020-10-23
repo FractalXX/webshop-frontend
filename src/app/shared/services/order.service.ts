@@ -6,23 +6,19 @@ import Order from 'src/app/shared/interfaces/order.interface';
 import ProductOrder from 'src/app/shared/interfaces/product-order.interface';
 import Product from 'src/app/shared/interfaces/product.interface';
 import { ApiHttpClient } from 'src/app/shared/utils/api-http-client';
+import OrderCreate from '../interfaces/order-create.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  private currentOrder = new BehaviorSubject<Order>({
-    status: null,
+  private currentOrder = new BehaviorSubject<OrderCreate>({
     customer: null,
     paymentMethod: null,
-    shippingInfo: null,
-    billingInfo: null,
     products: [],
-    placedAt: null,
-    updatedAt: null,
   });
 
-  public get currentOrder$(): Observable<Order> {
+  public get currentOrder$(): Observable<OrderCreate> {
     return this.currentOrder.asObservable();
   }
 
@@ -64,6 +60,14 @@ export class OrderService {
   addProductToCurrentOrder(product: ProductOrder): void {
     this.updateCurrentOrder({
       products: [...this.currentOrder.value.products, product],
+    });
+  }
+
+  removeProductFromCurrentOrder(productId: string): void {
+    this.updateCurrentOrder({
+      products: this.currentOrder.value.products.filter(
+        (productOrder) => (productOrder.product as Product).id !== productId,
+      ),
     });
   }
 }

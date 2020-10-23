@@ -5,7 +5,9 @@
     <mat-card-title>{{ product.name }}</mat-card-title>
     <mat-checkbox matTooltip="Add product to order"
       color="primary"
-      [disabled]="product.quantity <= 0"></mat-checkbox>
+      [disabled]="product.quantity <= 0"
+      (change)="orderCheckChanged.emit($event.checked)">
+    </mat-checkbox>
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row wrap">

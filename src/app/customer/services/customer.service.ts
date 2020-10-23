@@ -12,4 +12,8 @@ export class CustomerService {
   getAllCustomers(): Observable<Customer[]> {
     return this.httpClient.get('/customers');
   }
+
+  createCustomer(customer: Customer): Observable<void> {
+    return this.httpClient.post('/customers', customer);
+  }
 }

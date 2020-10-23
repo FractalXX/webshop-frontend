@@ -1,16 +1,12 @@
 import { OrderStatus } from '../enums/order-status.enum';
-import { PaymentMethod } from '../enums/payment-method.enum';
-import ProductOrder from './product-order.interface';
+import CustomerInfo from './customer-info.interface';
+import OrderCreate from './order-create.interface';
 
-export default interface Order {
-  // FIXME: union type won't work on the template
-  customer: any;
-  shippingInfo: any;
-  billingInfo: any;
-  products: ProductOrder[];
+export default interface Order extends OrderCreate {
+  shippingInfo: CustomerInfo;
+  billingInfo: CustomerInfo;
   placedAt: Date;
-  updatedAt?: Date;
-  paymentMethod: PaymentMethod;
+  updatedAt: Date;
   status: OrderStatus;
-  totalDue?: number;
+  totalDue: number;
 }
