@@ -1,24 +1,7 @@
-
 .orders-card {
   overflow: auto;
 
   .orders-table {
     min-width: 868px;
-
-    .main-row {
-      cursor: pointer;
-
-      &:hover {
-        background-color: #eee;
-      }
-    }
-
-    .details-row {
-      height: 0;
-    }
-
-    .expanded-row-details {
-      overflow: hidden;
-    }
   }
 }

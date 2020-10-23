@@ -1,6 +1,5 @@
 <div class="page-header" 
   fxLayout="row"
-  fxLayout.lt-md="column"
   fxLayoutAlign="space-between center">
   <h1>Orders</h1>
   <mat-form-field>
@@ -19,7 +18,7 @@
     <mat-card *ngIf="orders.length; else noResultTemplate"
       class="orders-card">
       <mat-card-content fxLayout="row">
-        <table class="orders-table" 
+        <table class="expandable-table orders-table" 
           mat-table
           fxFlex
           multiTemplateDataRows

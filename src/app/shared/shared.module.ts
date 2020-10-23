@@ -17,6 +17,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { CustomerInfoComponent } from './components/customer-info/customer-info.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SimpleAddressComponent } from './components/simple-address/simple-address.component';
 import { SimpleInputComponent } from './components/simple-input/simple-input.component';
@@ -41,7 +42,12 @@ const materialModules = [
 const commonModules = [FormsModule, ReactiveFormsModule, RouterModule];
 
 @NgModule({
-  declarations: [HeaderComponent, SimpleInputComponent, SimpleAddressComponent],
+  declarations: [
+    HeaderComponent,
+    SimpleInputComponent,
+    SimpleAddressComponent,
+    CustomerInfoComponent,
+  ],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -54,7 +60,7 @@ const commonModules = [FormsModule, ReactiveFormsModule, RouterModule];
     RouterModule,
     HeaderComponent,
     SimpleInputComponent,
-    SimpleAddressComponent,
+    CustomerInfoComponent,
     ...materialModules,
     ...commonModules,
   ],

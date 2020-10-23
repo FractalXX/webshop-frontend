@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import Customer from 'src/app/shared/interfaces/customer.interface';
+import { ApiHttpClient } from 'src/app/shared/utils/api-http-client';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CustomerService {
+  constructor(private httpClient: ApiHttpClient) {}
 
-  constructor() { }
+  getAllCustomers(): Observable<Customer[]> {
+    return this.httpClient.get('/customers');
+  }
 }

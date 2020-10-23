@@ -1,9 +1,7 @@
 <section class="order-details"
   fxLayout="row"
-  fxLayout.lt-md="column"
   fxLayoutGap="16px">
-  <div fxFlex="50%"
-    fxFlex.lt-md="auto">
+  <div fxFlex="50%">
     <ng-container *ngIf="order.customer as customer">
       <h2>Customer</h2>
       <dl>
@@ -20,38 +18,19 @@
 
     <div fxLayout="row wrap">
       <div *ngIf="order.billingInfo as billingInfo"
-        fxFlex="50%"
-        fxFlex.lt-md="100%">
+        fxFlex="50%">
         <h2>Billing info</h2>
-        <dl>
-          <dt>Name:</dt>
-          <dd>{{ billingInfo.name }}</dd>
-  
-          <dt>Address:</dt>
-          <dd>
-            <app-simple-address [address]="billingInfo"></app-simple-address>
-          </dd>
-        </dl>
+        <app-customer-info [customerInfo]="billingInfo"></app-customer-info>
       </div>
   
       <div *ngIf="order.shippingInfo as shippingInfo"
-        fxFlex="50%"
-        fxFlex.lt-md="100%">
+        fxFlex="50%">
         <h2>Shipping info</h2>
-        <dl>
-          <dt>Name:</dt>
-          <dd>{{ shippingInfo.name }}</dd>
-  
-          <dt>Address:</dt>
-          <dd>
-            <app-simple-address [address]="shippingInfo"></app-simple-address>
-          </dd>
-        </dl>
+        <app-customer-info [customerInfo]="shippingInfo"></app-customer-info>
       </div>
     </div>
   </div>
-  <div fxFlex="50%"
-    fxFlex.lt-md="auto">
+  <div fxFlex="50%">
     <h2>Ordered products</h2>
     <div fxLayout="row wrap"
       fxLayoutAlign="end">

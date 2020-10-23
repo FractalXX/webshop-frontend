@@ -1,0 +1,16 @@
+<div fxLayout="row"
+  fxLayoutGap="16px">
+  <div fxFlex="calc(50%-16px)">
+    <h2>Billing info</h2>
+    <div class="customer-info-container">
+      <app-customer-info [customerInfo]="customer.billingInfo"></app-customer-info>
+    </div>
+  </div>
+  <div fxFlex="calc(50%-16px)">
+    <h2>Shipping infos</h2>
+    <div *ngFor="let shippingInfo of customer.shippingInfos"
+      class="customer-info-container">
+      <app-customer-info [customerInfo]="shippingInfo"></app-customer-info>
+    </div>
+  </div>
+</div>

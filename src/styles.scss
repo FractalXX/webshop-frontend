@@ -16,6 +16,24 @@ table {
   th.mat-header-cell {
     color: $app-primary;
   }
+
+  &.expandable-table {
+    .main-row {
+      cursor: pointer;
+
+      &:hover {
+        background-color: #eee;
+      }
+    }
+
+    .details-row {
+      height: 0;
+    }
+
+    .expanded-row-details {
+      overflow: hidden;
+    }
+  }
 }
 
 .mat-select-value {

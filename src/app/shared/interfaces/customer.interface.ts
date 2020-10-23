@@ -5,6 +5,6 @@ export default interface Customer {
   name: string;
   email: string;
   birthDate: Date;
-  shippingInfos: CustomerInfo[];
-  billingInfo: CustomerInfo;
+  shippingInfos: any[];
+  billingInfo: any[];
 }
