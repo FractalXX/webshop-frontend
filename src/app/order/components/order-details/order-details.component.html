@@ -32,31 +32,9 @@
   </div>
   <div fxFlex="50%">
     <h2>Ordered products</h2>
-    <div fxLayout="row wrap"
-      fxLayoutAlign="end">
-      <table mat-table
-        class="products-table"
-        fxFlex="100%"
-        [dataSource]="order.products">
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef>Name</th>
-          <td mat-cell *matCellDef="let element">{{ element.product.name }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="price">
-          <th mat-header-cell *matHeaderCellDef>Price</th>
-          <td mat-cell *matCellDef="let element">{{ element.product.price }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef>Quantity</th>
-          <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="productTableColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: productTableColumns;"></tr>
-      </table>
-      <p class="total-due">Total due: {{ order.totalDue }}$</p>
-    </div>
+    <app-product-order-table
+      [productOrders]="order.products"
+      [totalDue]="order.totalDue"
+    ></app-product-order-table>
   </div>
 </section>

@@ -7,16 +7,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { CustomerInfoGroupComponent } from './components/customer-info-group/customer-info-group.component';
 import { CustomerInfoComponent } from './components/customer-info/customer-info.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SimpleAddressComponent } from './components/simple-address/simple-address.component';
@@ -28,18 +32,26 @@ const materialModules = [
   MatButtonModule,
   MatCardModule,
   MatCheckboxModule,
+  MatDatepickerModule,
   MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
+  MatNativeDateModule,
   MatRippleModule,
   MatSelectModule,
+  MatStepperModule,
   MatTableModule,
   MatTabsModule,
   MatTooltipModule,
 ];
 
-const commonModules = [FormsModule, ReactiveFormsModule, RouterModule];
+const commonModules = [
+  FormsModule,
+  ReactiveFormsModule,
+  RouterModule,
+  FlexLayoutModule,
+];
 
 @NgModule({
   declarations: [
@@ -47,6 +59,7 @@ const commonModules = [FormsModule, ReactiveFormsModule, RouterModule];
     SimpleInputComponent,
     SimpleAddressComponent,
     CustomerInfoComponent,
+    CustomerInfoGroupComponent,
   ],
   imports: [
     CommonModule,
@@ -56,11 +69,11 @@ const commonModules = [FormsModule, ReactiveFormsModule, RouterModule];
     ...commonModules,
   ],
   exports: [
-    FlexLayoutModule,
     RouterModule,
     HeaderComponent,
     SimpleInputComponent,
     CustomerInfoComponent,
+    CustomerInfoGroupComponent,
     ...materialModules,
     ...commonModules,
   ],

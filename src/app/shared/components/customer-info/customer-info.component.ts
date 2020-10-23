@@ -4,7 +4,7 @@ import CustomerInfo from '../../interfaces/customer-info.interface';
 @Component({
   selector: 'app-customer-info',
   template: `
-    <dl>
+    <dl *ngIf="customerInfo">
       <dt>Name:</dt>
       <dd>{{ customerInfo.name }}</dd>
 

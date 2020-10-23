@@ -26,7 +26,7 @@ export class SimpleInputComponent
   implements OnInit, ControlValueAccessor {
   @Input() label: string;
   @Input() hint: string;
-  @Input() type: 'password' | 'number' | 'text' | 'email' = 'text';
+  @Input() type: 'password' | 'text' | 'email' = 'text';
   @Input() required = false;
 
   public internalControl = new FormControl();
@@ -73,6 +73,6 @@ export class SimpleInputComponent
   }
 
   getFirstError(): string {
-    return keys(this.control.errors)[0];
+    return this.control.errors && keys(this.control.errors)[0];
   }
 }

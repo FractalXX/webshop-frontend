@@ -7,7 +7,7 @@
     [type]="type"
   />
   <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
-  <mat-error *ngIf="internalControl.errors && getFirstError() as error">
+  <mat-error *ngIf="internalControl.touched && getFirstError() as error">
     {{ error }}
   </mat-error>
 </mat-form-field>

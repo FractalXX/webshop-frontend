@@ -1,0 +1,30 @@
+<form [formGroup]="formGroup">
+  <div [fxLayout]="layout"
+    [fxLayoutGap]="layoutGap">
+    <app-simple-input
+      formControlName="name"
+      label="Name"
+      [required]="required"
+    ></app-simple-input>
+    <app-simple-input
+      formControlName="country"
+      label="Country"
+      [required]="required"
+    ></app-simple-input>
+    <app-simple-input
+      formControlName="city"
+      label="City"
+      [required]="required"
+    ></app-simple-input>
+    <app-simple-input
+      formControlName="zipCode"
+      label="Zip code"
+      [required]="required"
+    ></app-simple-input>
+    <app-simple-input
+      formControlName="address"
+      label="Address"
+      [required]="required"
+    ></app-simple-input>
+  </div>
+</form>

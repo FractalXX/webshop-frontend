@@ -1,0 +1,76 @@
+<div class="page-header">
+  <h1>Place order</h1>
+</div>
+<mat-divider></mat-divider>
+<div class="page-content">
+  <mat-card>
+    <mat-card-content>
+      <mat-vertical-stepper [linear]="true">
+        <mat-step [stepControl]="personalInfoGroup">
+          <ng-template matStepLabel>Personal info</ng-template>
+          <form [formGroup]="personalInfoGroup">
+            <div fxLayout="row"
+            fxLayoutGap="16px">
+              <app-simple-input
+                label="Full name"
+                formControlName="name"
+                [required]="true"
+              ></app-simple-input>
+              <app-simple-input
+                label="E-mail address"
+                formControlName="email"
+                type="email"
+                [required]="true"
+              ></app-simple-input>
+              <mat-form-field>
+                <mat-label>Date of birth</mat-label>
+                <input matInput
+                  formControlName="birthDate"
+                  [matDatepicker]="picker"
+                  [max]="maxDate"
+                />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="shippingGroup">
+          <ng-template matStepLabel>Shipping and payment</ng-template>
+          <form [formGroup]="shippingGroup">
+            <!-- FIXME expression changed error -->
+            <app-customer-info-group 
+              [formGroup]="shippingGroup.controls.billingInfo"
+            ></app-customer-info-group>
+            <app-customer-info-group
+              [formGroup]="shippingGroup.controls.shippingInfo"
+            ></app-customer-info-group>
+
+            <mat-form-field>
+              <mat-label>Payment method</mat-label>
+              <mat-select formControlName="paymentMethod"
+                [required]="true">
+                <mat-option *ngFor="let paymentMethod of paymentMethodValues" [value]="paymentMethod.value">
+                  {{ paymentMethod.label }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Summary</ng-template>
+          <app-order-details
+            [order]="currentOrder$ | async"
+          ></app-order-details>
+          <div fxLayout="row"
+            fxLayoutAlign="end">
+            <button mat-raised-button
+              color="primary">
+              Submit order
+            </button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+    </mat-card-content>
+  </mat-card>
+</div>
