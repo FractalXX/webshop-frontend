@@ -13,4 +13,7 @@
   <mat-error *ngIf="internalControl.errors?.pattern">
     Invalid format.
   </mat-error>
+  <mat-error *ngIf="internalControl.errors?.email">
+    A valid e-mail is required.
+  </mat-error>
 </mat-form-field>

@@ -1,0 +1,13 @@
+<div class="page-header" 
+  fxLayout="row"
+  fxLayoutAlign="space-between center">
+  <h1>Order details</h1>
+</div>
+<mat-divider></mat-divider>
+<div class="page-content">
+  <mat-card>
+    <mat-card-content>
+      <app-order-details [order]="order$ | async"></app-order-details>
+    </mat-card-content>
+  </mat-card>
+</div>

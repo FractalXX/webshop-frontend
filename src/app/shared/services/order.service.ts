@@ -41,6 +41,17 @@ export class OrderService {
       );
   }
 
+  getOrderById(id: string): Observable<Order> {
+    return this.httpClient
+      .get<Order>(`/orders/${id}`)
+      .pipe(
+        map((order) => ({
+          ...order,
+          totalDue: this.getTotalDue(order.products),
+        })),
+      );
+  }
+
   createOrder(order: OrderCreate): Observable<void> {
     return this.httpClient.post('/orders', {
       paymentMethod: order.paymentMethod,

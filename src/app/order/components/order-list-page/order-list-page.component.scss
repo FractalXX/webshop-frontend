@@ -3,5 +3,13 @@
 
   .orders-table {
     min-width: 868px;
+
+    tr.clickable {
+      cursor: pointer;
+
+      &:hover {
+        background-color: #eee;
+      }
+    }
   }
 }

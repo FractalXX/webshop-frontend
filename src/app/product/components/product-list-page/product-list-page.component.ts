@@ -71,6 +71,8 @@ export class ProductListPageComponent implements OnInit {
         quantityFrom: 0,
         quantityTo: 0,
       });
+    } else {
+      this.filterForm.reset();
     }
   }
 

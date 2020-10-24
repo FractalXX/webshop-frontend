@@ -18,9 +18,8 @@
     <mat-card *ngIf="orders.length; else noResultTemplate"
       class="orders-card">
       <mat-card-content>
-        <table class="expandable-table orders-table" 
+        <table class="orders-table" 
           mat-table
-          multiTemplateDataRows
           [dataSource]="orders">
 
           <ng-container matColumnDef="customerName">
@@ -52,29 +51,14 @@
             <th mat-header-cell *matHeaderCellDef>Updated at</th>
             <td mat-cell *matCellDef="let element">{{ element.updatedAt | date }}</td>
           </ng-container>
-
-          <ng-container matColumnDef="expandedDetail">
-            <td mat-cell *matCellDef="let element"
-              [attr.colspan]="displayedColumns.length">
-              <div class="expanded-row-details"
-                [@expandRow]="expandedRow === element ? 'expanded' : 'collapsed'">
-                <app-order-details [order]="element"></app-order-details>
-              </div>
-            </td>
-          </ng-container>
   
           <tr mat-header-row 
             *matHeaderRowDef="displayedColumns"
           ></tr>
-          <!-- TODO: ripple on click -->
-          <tr class="main-row"
+          <tr class="clickable"
             mat-row
             *matRowDef="let row; columns: displayedColumns;"
-            (click)="expandedRow = expandedRow === row ? null : row"
-          ></tr>
-          <tr mat-row
-            *matRowDef="let row; columns: ['expandedDetail']"
-            class="details-row"
+            [routerLink]="'/orders/' + row.id"
           ></tr>
         </table>
       </mat-card-content>

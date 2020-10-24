@@ -40,7 +40,7 @@ export class OrderPlacePageComponent extends BaseDirective {
     super();
     this.personalInfoGroup = formBuilder.group({
       name: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
-      email: [''],
+      email: ['', [Validators.email]],
       birthDate: [''],
     });
 

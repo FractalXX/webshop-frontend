@@ -1,0 +1,55 @@
+<div class="page-header" 
+  fxLayout="row"
+  fxLayoutAlign="space-between center">
+  <h1>Customer details</h1>
+</div>
+<mat-divider></mat-divider>
+<div class="page-content" *ngIf="customer$ | async as customer">
+    <dl class="main-data"
+      fxLayout="row wrap"
+      fxLayoutAlign="space-between"
+      fxLayoutGap="20px">
+      <div>
+        <dt>Name:</dt>
+        <dd>{{ customer.name }}</dd>
+      </div>
+      <div>
+        <dt>E-mail address:</dt>
+        <dd>{{ customer.email }}</dd>
+      </div>
+      <div>
+        <dt>Date of birth:</dt>
+        <dd>{{ customer.birthDate | date }}</dd>     
+      </div>
+    </dl>
+    <mat-divider></mat-divider>
+    <div class="info-list" 
+      fxLayout="row wrap"
+      fxLayoutGap="24px grid">
+      <div fxFlex="calc((100%/5)-20px)"
+        fxFlex.lt-xl="calc((100%/4)-20px)"
+        fxFlex.lt-lg="calc((100%/3)-20px)"
+        fxFlex.lt-md="calc((100%/2)-20px)"
+        fxFlex.lt-sm="calc(100%-20px)">
+        <mat-card>
+          <mat-card-content>
+            <h2>Billing info</h2>
+            <app-customer-info [customerInfo]="customer.billingInfo"></app-customer-info>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div *ngFor="let shippingInfo of customer.shippingInfos"
+        fxFlex="calc((100%/5)-20px)"
+        fxFlex.lt-xl="calc((100%/4)-20px)"
+        fxFlex.lt-lg="calc((100%/3)-20px)"
+        fxFlex.lt-md="calc((100%/2)-20px)"
+        fxFlex.lt-sm="calc(100%-20px)">
+        <mat-card>
+          <mat-card-content>
+            <h2>Shipping info</h2>
+            <app-customer-info [customerInfo]="shippingInfo"></app-customer-info>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+</div>

@@ -28,28 +28,14 @@
             <th mat-header-cell *matHeaderCellDef>Date of birth</th>
             <td mat-cell *matCellDef="let element">{{ element.birthDate | date }}</td>
           </ng-container>
-
-          <ng-container matColumnDef="expandedDetail">
-            <td mat-cell *matCellDef="let element"
-              [attr.colspan]="displayedColumns.length">
-              <div class="expanded-row-details"
-                [@expandRow]="expandedRow === element ? 'expanded' : 'collapsed'">
-                <app-customer-detail [customer]="element"></app-customer-detail>
-              </div>
-            </td>
-          </ng-container>
   
           <tr mat-header-row 
             *matHeaderRowDef="displayedColumns"
           ></tr>
-          <tr class="main-row"
+          <tr class="clickable"
             mat-row
             *matRowDef="let row; columns: displayedColumns;"
-            (click)="expandedRow = expandedRow === row ? null : row"
-          ></tr>
-          <tr mat-row
-            *matRowDef="let row; columns: ['expandedDetail']"
-            class="details-row"
+            [routerLink]="'/customers/' + row.id"
           ></tr>
         </table>
       </mat-card-content>

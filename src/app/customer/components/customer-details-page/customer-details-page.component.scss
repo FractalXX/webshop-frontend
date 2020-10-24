@@ -1,0 +1,22 @@
+.main-data {
+  margin-bottom: 20px;
+
+  > div {
+    font-size: 24px;
+    margin-top: 8px;
+
+    dt,
+    dd {
+      margin: 0;
+      display: inline-block;
+    }
+
+    dd {
+      margin-left: 4px;
+    }
+  }
+}
+
+.info-list {
+  padding-top: 20px;
+}
