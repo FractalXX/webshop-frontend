@@ -1,7 +1,8 @@
 <section class="order-details"
-  fxLayout="row"
+  fxLayout="row wrap"
   fxLayoutGap="16px">
-  <div fxFlex="50%">
+  <div fxFlex="calc(50%-16px)"
+    [fxFlex.lt-md]="breakUnderMd ? '100%' : 'calc(50%-16px)'">
     <ng-container *ngIf="order.customer as customer">
       <h2>Customer</h2>
       <dl>
@@ -18,19 +19,22 @@
 
     <div fxLayout="row wrap">
       <div *ngIf="order.billingInfo as billingInfo"
-        fxFlex="50%">
+        fxFlex="calc(50%-16px)"
+        [fxFlex.lt-md]="breakUnderMd ? '100%' : 'calc(50%-16px)'">
         <h2>Billing info</h2>
         <app-customer-info [customerInfo]="billingInfo"></app-customer-info>
       </div>
   
       <div *ngIf="order.shippingInfo as shippingInfo"
-        fxFlex="50%">
+        fxFlex="calc(50%-16px)"
+        [fxFlex.lt-md]="breakUnderMd ? '100%' : 'calc(50%-16px)'">
         <h2>Shipping info</h2>
         <app-customer-info [customerInfo]="shippingInfo"></app-customer-info>
       </div>
     </div>
   </div>
-  <div fxFlex="50%">
+  <div fxFlex="calc(50%-16px)"
+    [fxFlex.lt-md]="breakUnderMd ? '100%' : 'calc(50%-16px)'">
     <h2>Ordered products</h2>
     <app-product-order-table
       [productOrders]="order.products"

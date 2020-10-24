@@ -37,6 +37,7 @@
         type="number"
       ></app-simple-input>
       <button mat-stroked-button
+        fxFlex="1 0 auto"
         type="submit"
         color="primary">
         Filter
@@ -59,13 +60,14 @@
       </button>
     </div>
     <div *ngIf="products.length; else noResultTemplate"
-      gdColumns="repeat(4, 1fr)"
-      gdColumns.lt-xl="repeat(3, 1fr)"
-      gdColumns.lt-lg="repeat(2, 1fr)"
-      gdColumns.lt-md="1fr"
-      gdRows="auto"
-      gdGap="20px">
+      fxLayout="row wrap"
+      fxLayoutGap="20px grid">
+      <!-- Flex is used instead of grid due to inconsistent browser support (mainly on iOS) -->
       <app-product-card
+        fxFlex="calc((100%/4)-20px)"
+        fxFlex.lt-xl="calc((100%/3)-20px)"
+        fxFlex.lt-lg="calc((100%/2)-20px)"
+        fxFlex.lt-md="100%"
         class="product-card"
         *ngFor="let product of products$ | async"
         [product]="product">

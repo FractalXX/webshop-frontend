@@ -21,7 +21,6 @@ import { ProductAddDialogComponent } from '../product-add-dialog/product-add-dia
 @Component({
   selector: 'app-product-list-page',
   templateUrl: './product-list-page.component.html',
-  styleUrls: ['./product-list-page.component.scss'],
 })
 export class ProductListPageComponent implements OnInit {
   // Form will be template driven since it's easier to handle disabled states on the template this way
@@ -85,9 +84,11 @@ export class ProductListPageComponent implements OnInit {
         data: product.quantity,
       })
       .afterClosed()
-      .subscribe((quantity) =>
-        this.updateProductOrder(product, true, quantity),
-      );
+      .subscribe((quantity) => {
+        if (quantity) {
+          this.updateProductOrder(product, true, quantity);
+        }
+      });
   }
 
   updateProductOrder(

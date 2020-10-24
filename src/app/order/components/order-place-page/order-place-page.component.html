@@ -9,7 +9,7 @@
         <mat-step [stepControl]="personalInfoGroup">
           <ng-template matStepLabel>Personal info</ng-template>
           <form [formGroup]="personalInfoGroup">
-            <div fxLayout="row"
+            <div fxLayout="row wrap"
             fxLayoutGap="16px">
               <app-simple-input
                 label="Full name"
@@ -32,17 +32,24 @@
                 />
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="personalInfoGroup.get('birthDate').errors?.matDatepickerParse">
+                  Invalid date format.
+                </mat-error>
               </mat-form-field>
             </div>
           </form>
           <div fxLayout="row"
-            fxLayoutAlign="end">
+            fxLayoutAlign="end"
+            fxLayoutGap="8px">
             <button matStepperNext
+              fxFlex.lt-md="calc(50%-8px)"
+              fxFlex.lt-sm="100%"
               mat-stroked-button
               color="primary"
               [disabled]="personalInfoGroup.invalid">
               Next
             </button>
+            <div fxHide fxShow.sm fxFlex="calc(50%-8px)"></div>
           </div>
         </mat-step>
         <mat-step [stepControl]="shippingGroup">
@@ -79,10 +86,17 @@
               </mat-select>
             </mat-form-field>
           </form>
-          <div fxLayout="row"
+          <div fxLayout="row wrap"
+            fxLayout.lt-sm="column"
+            fxLayoutGap="8px"
             fxLayoutAlign="space-between">
-            <button matStepperPrevious mat-stroked-button>Previous</button>
+            <button matStepperPrevious 
+              fxFlex.sm="calc(50%-8px)"    
+              mat-stroked-button>
+              Previous
+            </button>
             <button matStepperNext
+              fxFlex.sm="calc(50%-8px)"
               mat-stroked-button
               color="primary"
               [disabled]="shippingGroup.invalid">
@@ -94,11 +108,19 @@
           <ng-template matStepLabel>Summary</ng-template>
           <app-order-details
             [order]="currentOrder$ | async"
+            [breakUnderMd]="true"
           ></app-order-details>
-          <div fxLayout="row"
+          <div fxLayout="row wrap"
+            fxLayout.lt-sm="column"
+            fxLayoutGap="8px"
             fxLayoutAlign="space-between">
-            <button matStepperPrevious mat-stroked-button>Previous</button>
+            <button matStepperPrevious
+              fxFlex.sm="calc(50%-8px)"     
+              mat-stroked-button>
+              Previous
+            </button>
             <button mat-raised-button
+              fxFlex.sm="calc(50%-8px)"
               color="primary"
               (click)="placeOrder()">
               Submit order

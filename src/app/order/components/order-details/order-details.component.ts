@@ -8,6 +8,7 @@ import Order from 'src/app/shared/interfaces/order.interface';
 })
 export class OrderDetailsComponent {
   @Input() order: Order;
+  @Input() breakUnderMd = false;
 
   public productTableColumns = ['name', 'price', 'quantity'];
 }
