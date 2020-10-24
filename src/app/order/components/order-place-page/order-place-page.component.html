@@ -37,10 +37,6 @@
         </mat-step>
         <mat-step [stepControl]="shippingGroup">
           <ng-template matStepLabel>Shipping and payment</ng-template>
-          <mat-checkbox [(ngModel)]="matchIndicator"
-            color="primary">
-            Use my shipping info for billing
-          </mat-checkbox>
           <form [formGroup]="shippingGroup">
             <!-- FIXME expression changed error -->
             <h2>
@@ -48,14 +44,19 @@
             </h2>
             <app-customer-info-group 
               [formGroup]="shippingGroup.controls.billingInfo"
-              [disabled]="matchIndicator"
             ></app-customer-info-group>
 
             <h2>
               Shipping info
             </h2>
+            <mat-checkbox [(ngModel)]="matchIndicator"
+              [ngModelOptions]="{ standalone: true }"
+              color="primary">
+              Use my billing info for shipping
+            </mat-checkbox>
             <app-customer-info-group
               [formGroup]="shippingGroup.controls.shippingInfo"
+              [disabled]="matchIndicator"
             ></app-customer-info-group>
 
             <mat-form-field>

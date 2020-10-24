@@ -13,7 +13,7 @@ export class CustomerService {
     return this.httpClient.get('/customers');
   }
 
-  createCustomer(customer: Customer): Observable<void> {
+  createCustomer(customer: Customer): Observable<Customer> {
     return this.httpClient.post('/customers', customer);
   }
 }

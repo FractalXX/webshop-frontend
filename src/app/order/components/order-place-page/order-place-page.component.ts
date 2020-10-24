@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
-import { map, startWith, switchMap } from 'rxjs/operators';
+import { map, startWith, switchMap, tap } from 'rxjs/operators';
 import { CustomerService } from 'src/app/customer/services/customer.service';
 import { BaseDirective } from 'src/app/shared/base/base.directive';
 import { PaymentMethod } from 'src/app/shared/enums/payment-method.enum';
@@ -53,8 +53,8 @@ export class OrderPlacePageComponent extends BaseDirective implements OnInit {
 
     this.managedSubscriptions.push(
       combineLatest([
-        this.shippingGroup.valueChanges.pipe(startWith({})),
         this.personalInfoGroup.valueChanges.pipe(startWith({})),
+        this.shippingGroup.valueChanges.pipe(startWith({})),
       ])
         .pipe(
           map((result) => ({
@@ -86,14 +86,17 @@ export class OrderPlacePageComponent extends BaseDirective implements OnInit {
   placeOrder(): void {
     const { billingInfo, shippingInfo } = this.shippingGroup.value;
 
-    // TODO create order
     this.customerService
       .createCustomer({
         ...this.personalInfoGroup.value,
-        billingInfo: this.matchIndicator ? shippingInfo : billingInfo,
-        shippingInfos: [shippingInfo],
+        billingInfo,
+        shippingInfos: this.matchIndicator ? [billingInfo] : [shippingInfo],
       })
-      .pipe(switchMap(() => this.orderService.currentOrder$))
+      .pipe(
+        tap((customer) => this.orderService.updateCurrentOrder({ customer })),
+        switchMap(() => this.orderService.currentOrder$),
+        switchMap((order) => this.orderService.createOrder(order)),
+      )
       .subscribe(() => {
         this.notificationService.notify('Order successfully created.');
         this.router.navigateByUrl('/orders');
