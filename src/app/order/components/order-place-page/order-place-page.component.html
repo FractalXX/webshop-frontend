@@ -32,8 +32,11 @@
                 />
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-                <mat-error *ngIf="personalInfoGroup.get('birthDate').errors?.matDatepickerParse">
-                  Invalid date format.
+                <mat-error *ngIf="personalInfoGroup.get('birthDate').errors?.required">
+                  Field is required.
+                </mat-error>
+                <mat-error *ngIf="personalInfoGroup.get('birthDate').errors?.matDatepickerMax">
+                  Value exceeds maximum.
                 </mat-error>
               </mat-form-field>
             </div>
