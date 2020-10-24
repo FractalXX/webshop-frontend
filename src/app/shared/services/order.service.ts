@@ -12,10 +12,14 @@ import OrderCreate from '../interfaces/order-create.interface';
   providedIn: 'root',
 })
 export class OrderService {
-  private currentOrder = new BehaviorSubject<OrderCreate>({
+  private readonly emptyOrder = {
     customer: null,
     paymentMethod: null,
     products: [],
+  };
+
+  private currentOrder = new BehaviorSubject<OrderCreate>({
+    ...this.emptyOrder,
   });
 
   public get currentOrder$(): Observable<OrderCreate> {
@@ -31,7 +35,7 @@ export class OrderService {
         map((orders) =>
           orders.map((order) => ({
             ...order,
-            totalDue: this.getTotalDue(order),
+            totalDue: this.getTotalDue(order.products),
           })),
         ),
       );
@@ -48,13 +52,13 @@ export class OrderService {
     });
   }
 
-  getTotalDue(order: Order): number {
-    return order.products
+  getTotalDue(products: ProductOrder[]): number {
+    return products
       .map(
         (productOrder) =>
           (productOrder.product as Product).price * productOrder.quantity,
       )
-      .reduce((previous, acc) => previous + acc);
+      .reduce((previous, acc) => previous + acc, 0);
   }
 
   updateCurrentOrder(data: Partial<Order>): void {
@@ -65,16 +69,27 @@ export class OrderService {
   }
 
   addProductToCurrentOrder(product: ProductOrder): void {
+    const products = [...this.currentOrder.value.products, product];
     this.updateCurrentOrder({
-      products: [...this.currentOrder.value.products, product],
+      products,
+      totalDue: this.getTotalDue(products),
     });
   }
 
   removeProductFromCurrentOrder(productId: string): void {
+    const products = this.currentOrder.value.products.filter(
+      (productOrder) => (productOrder.product as Product).id !== productId,
+    );
+
     this.updateCurrentOrder({
-      products: this.currentOrder.value.products.filter(
-        (productOrder) => (productOrder.product as Product).id !== productId,
-      ),
+      products,
+      totalDue: this.getTotalDue(products),
+    });
+  }
+
+  resetOrder(): void {
+    this.currentOrder.next({
+      ...this.emptyOrder,
     });
   }
 }

@@ -3,11 +3,7 @@
     fxLayout="row"
     fxLayoutAlign="space-between center">
     <mat-card-title>{{ product.name }}</mat-card-title>
-    <mat-checkbox matTooltip="Add product to order"
-      color="primary"
-      [disabled]="product.quantity <= 0"
-      (change)="orderCheckChanged.emit($event.checked)">
-    </mat-checkbox>
+    <ng-content select="[product-card-actions]"></ng-content>
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row wrap">

@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Add product to order</h1>
+<div mat-dialog-content>
+  <app-simple-input
+    label="Quantity"
+    [(ngModel)]="quantity"
+    [appMin]="0"
+    [appMax]="maxQuantity"
+  ></app-simple-input>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="quantity">Ok</button>
+</div>

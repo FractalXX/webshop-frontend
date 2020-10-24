@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SimpleNotificationComponent } from '../components/simple-notification/simple-notification.component';
 import { NotificationType } from '../enums/notification-type.enum';
 
 @Injectable({
@@ -13,7 +14,8 @@ export class NotificationService {
     type: NotificationType = NotificationType.SUCCESS,
     duration = 3000,
   ): void {
-    this.snackBar.open(text, null, {
+    this.snackBar.openFromComponent(SimpleNotificationComponent, {
+      data: text,
       duration,
       panelClass: type,
     });

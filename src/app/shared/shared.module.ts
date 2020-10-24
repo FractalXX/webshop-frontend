@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -26,6 +27,9 @@ import { CustomerInfoComponent } from './components/customer-info/customer-info.
 import { HeaderComponent } from './components/header/header.component';
 import { SimpleAddressComponent } from './components/simple-address/simple-address.component';
 import { SimpleInputComponent } from './components/simple-input/simple-input.component';
+import { SimpleNotificationComponent } from './components/simple-notification/simple-notification.component';
+import { MaxDirective } from './directives/max.directive';
+import { MinDirective } from './directives/min.directive';
 import { ApiHttpClient } from './utils/api-http-client';
 import createApiHttpClient from './utils/api-http-client-factory';
 
@@ -35,6 +39,7 @@ const materialModules = [
   MatCheckboxModule,
   MatDatepickerModule,
   MatDividerModule,
+  MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -62,6 +67,9 @@ const commonModules = [
     SimpleAddressComponent,
     CustomerInfoComponent,
     CustomerInfoGroupComponent,
+    SimpleNotificationComponent,
+    MinDirective,
+    MaxDirective,
   ],
   imports: [
     CommonModule,
@@ -76,6 +84,8 @@ const commonModules = [
     SimpleInputComponent,
     CustomerInfoComponent,
     CustomerInfoGroupComponent,
+    MinDirective,
+    MaxDirective,
     ...materialModules,
     ...commonModules,
   ],

@@ -53,9 +53,10 @@ export class OrderListPageComponent extends BaseDirective implements OnInit {
         .subscribe(),
     );
 
-    this.orders$ = this.queryService.buildQueryObservable((params) =>
-      this.orderService.getOrdersByQueryParams(params),
-    );
+    this.orders$ = this.queryService.buildQueryObservable((params) => {
+      this.statusControl.setValue(params.status);
+      return this.orderService.getOrdersByQueryParams(params);
+    });
   }
 
   onOrderStatusSelectionChanged(status: OrderStatus): void {

@@ -23,8 +23,8 @@
         name="quantityFrom"
         [(ngModel)]="filterFormModel.quantityFrom"
         [disabled]="outOfStockIndicator.checked"
+        [appMin]="0"
         label="Min. quantity"
-        hint="Inclusive. Must be at least zero."
         type="number"
       ></app-simple-input>
       <app-simple-input
@@ -32,8 +32,8 @@
         name="quantityTo"
         [(ngModel)]="filterFormModel.quantityTo"
         [disabled]="outOfStockIndicator.checked"
+        [appMin]="0"
         label="Max. quantity"
-        hint="Inclusive. Must be at least zero."
         type="number"
       ></app-simple-input>
       <button mat-stroked-button
@@ -68,9 +68,28 @@
       <app-product-card
         class="product-card"
         *ngFor="let product of products$ | async"
-        [product]="product"
-        (orderCheckChanged)="updateProductOrder(product, $event)"
-      ></app-product-card>
+        [product]="product">
+        <div product-card-actions>
+          <button *ngIf="!(productsInOrder$ | async).includes(product.id); else removeTemplate"
+            mat-icon-button
+            mat-raised-button
+            color="primary"
+            matTooltip="Add to order"
+            (click)="openProductAddDialog(product)"
+            [disabled]="product.quantity <= 0">
+            <mat-icon>add</mat-icon>
+          </button>
+          <ng-template #removeTemplate>
+            <button mat-icon-button
+              mat-raised-button
+              color="primary"
+              matTooltip="Remove from order"
+              (click)="updateProductOrder(product, false)">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </ng-template>
+        </div>
+      </app-product-card>
     </div>
   </div>
   <ng-template #noResultTemplate>

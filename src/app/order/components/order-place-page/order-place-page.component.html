@@ -28,17 +28,26 @@
                   formControlName="birthDate"
                   [matDatepicker]="picker"
                   [max]="maxDate"
+                  [required]="true"
                 />
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
           </form>
+          <div fxLayout="row"
+            fxLayoutAlign="end">
+            <button matStepperNext
+              mat-stroked-button
+              color="primary"
+              [disabled]="personalInfoGroup.invalid">
+              Next
+            </button>
+          </div>
         </mat-step>
         <mat-step [stepControl]="shippingGroup">
           <ng-template matStepLabel>Shipping and payment</ng-template>
           <form [formGroup]="shippingGroup">
-            <!-- FIXME expression changed error -->
             <h2>
               Billing info
             </h2>
@@ -69,6 +78,16 @@
               </mat-select>
             </mat-form-field>
           </form>
+          <div fxLayout="row"
+            fxLayoutAlign="space-between">
+            <button matStepperPrevious mat-stroked-button>Previous</button>
+            <button matStepperNext
+              mat-stroked-button
+              color="primary"
+              [disabled]="shippingGroup.invalid">
+              Next
+            </button>
+          </div>
         </mat-step>
         <mat-step>
           <ng-template matStepLabel>Summary</ng-template>
@@ -77,6 +96,7 @@
           ></app-order-details>
           <div fxLayout="row"
             fxLayoutAlign="end">
+            <button matStepperPrevious mat-stroked-button>Previous</button>
             <button mat-raised-button
               color="primary"
               (click)="placeOrder()">

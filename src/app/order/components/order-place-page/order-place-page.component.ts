@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map, startWith, switchMap, tap } from 'rxjs/operators';
@@ -7,14 +7,15 @@ import { CustomerService } from 'src/app/customer/services/customer.service';
 import { BaseDirective } from 'src/app/shared/base/base.directive';
 import { PaymentMethod } from 'src/app/shared/enums/payment-method.enum';
 import OrderCreate from 'src/app/shared/interfaces/order-create.interface';
-import Order from 'src/app/shared/interfaces/order.interface';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { noWhitespaceOnlyPattern } from 'src/app/shared/utils/patterns';
 import { OrderService } from '../../../shared/services/order.service';
 
 @Component({
   selector: 'app-order-place-page',
   templateUrl: './order-place-page.component.html',
   styleUrls: ['./order-place-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderPlacePageComponent extends BaseDirective implements OnInit {
   public readonly maxDate = new Date();
@@ -38,7 +39,7 @@ export class OrderPlacePageComponent extends BaseDirective implements OnInit {
   ) {
     super();
     this.personalInfoGroup = formBuilder.group({
-      name: [''],
+      name: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
       email: [''],
       birthDate: [''],
     });
@@ -75,11 +76,11 @@ export class OrderPlacePageComponent extends BaseDirective implements OnInit {
 
   private createAddressGroup(formBuilder: FormBuilder): FormGroup {
     return formBuilder.group({
-      name: [''],
-      country: [''],
-      city: [''],
-      zipCode: [''],
-      address: [''],
+      name: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
+      country: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
+      city: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
+      zipCode: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
+      address: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
     });
   }
 
@@ -100,6 +101,7 @@ export class OrderPlacePageComponent extends BaseDirective implements OnInit {
       .subscribe(() => {
         this.notificationService.notify('Order successfully created.');
         this.router.navigateByUrl('/orders');
+        this.orderService.resetOrder();
       });
   }
 }

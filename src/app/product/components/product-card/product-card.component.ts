@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import Product from 'src/app/shared/interfaces/product.interface';
 
 @Component({
@@ -6,11 +6,6 @@ import Product from 'src/app/shared/interfaces/product.interface';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss'],
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent {
   @Input() product: Product;
-  @Output() orderCheckChanged = new EventEmitter<boolean>();
-
-  constructor() {}
-
-  ngOnInit(): void {}
 }

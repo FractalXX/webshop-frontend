@@ -1,11 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
-import { keys } from 'lodash-es';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { BaseDirective } from '../../base/base.directive';
 
@@ -19,7 +13,6 @@ import { BaseDirective } from '../../base/base.directive';
       }
     `,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SimpleInputComponent
   extends BaseDirective
@@ -70,9 +63,5 @@ export class SimpleInputComponent
     } else {
       this.internalControl.enable();
     }
-  }
-
-  getFirstError(): string {
-    return this.control.errors && keys(this.control.errors)[0];
   }
 }
