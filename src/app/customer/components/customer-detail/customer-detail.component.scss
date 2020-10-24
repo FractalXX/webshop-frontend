@@ -2,8 +2,4 @@
 
 .customer-info-container {
   border-top: $mat-divider-border;
-
-  &:last-child {
-    border-bottom: $mat-divider-border;
-  }
 }

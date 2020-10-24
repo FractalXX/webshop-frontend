@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
-import { map, startWith, switchMap, tap } from 'rxjs/operators';
+import { first, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { CustomerService } from 'src/app/customer/services/customer.service';
 import { BaseDirective } from 'src/app/shared/base/base.directive';
 import { PaymentMethod } from 'src/app/shared/enums/payment-method.enum';
@@ -17,7 +17,7 @@ import { OrderService } from '../../../shared/services/order.service';
   styleUrls: ['./order-place-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OrderPlacePageComponent extends BaseDirective implements OnInit {
+export class OrderPlacePageComponent extends BaseDirective {
   public readonly maxDate = new Date();
 
   public personalInfoGroup: FormGroup;
@@ -64,24 +64,19 @@ export class OrderPlacePageComponent extends BaseDirective implements OnInit {
           })),
         )
         .subscribe((data) => {
+          const {
+            billingInfo,
+            shippingInfo,
+            paymentMethod,
+          } = data.shippingGroup;
           this.orderService.updateCurrentOrder({
             customer: { ...data.personalInfoGroup },
-            ...data.shippingGroup,
+            paymentMethod,
+            billingInfo,
+            shippingInfo: this.matchIndicator ? billingInfo : shippingInfo,
           });
         }),
     );
-  }
-
-  ngOnInit(): void {}
-
-  private createAddressGroup(formBuilder: FormBuilder): FormGroup {
-    return formBuilder.group({
-      name: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
-      country: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
-      city: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
-      zipCode: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
-      address: ['', [Validators.pattern(noWhitespaceOnlyPattern)]],
-    });
   }
 
   placeOrder(): void {
@@ -95,7 +90,7 @@ export class OrderPlacePageComponent extends BaseDirective implements OnInit {
       })
       .pipe(
         tap((customer) => this.orderService.updateCurrentOrder({ customer })),
-        switchMap(() => this.orderService.currentOrder$),
+        switchMap(() => this.orderService.currentOrder$.pipe(first())),
         switchMap((order) => this.orderService.createOrder(order)),
       )
       .subscribe(() => {
@@ -103,5 +98,30 @@ export class OrderPlacePageComponent extends BaseDirective implements OnInit {
         this.router.navigateByUrl('/orders');
         this.orderService.resetOrder();
       });
+  }
+
+  onMatchIndicatorUpdate(value: boolean): void {
+    this.matchIndicator = value;
+    if (!value) {
+      this.orderService.updateCurrentOrder({
+        shippingInfo: null,
+      });
+    } else {
+      this.shippingGroup.get('shippingInfo').reset();
+    }
+  }
+
+  private createAddressGroup(formBuilder: FormBuilder): FormGroup {
+    const plainTextControl = [
+      '',
+      [Validators.pattern(noWhitespaceOnlyPattern)],
+    ];
+    return formBuilder.group({
+      name: plainTextControl,
+      country: plainTextControl,
+      city: plainTextControl,
+      zipCode: plainTextControl,
+      address: plainTextControl,
+    });
   }
 }

@@ -58,7 +58,8 @@
             <h2>
               Shipping info
             </h2>
-            <mat-checkbox [(ngModel)]="matchIndicator"
+            <mat-checkbox [ngModel]="matchIndicator"
+              (ngModelChange)="onMatchIndicatorUpdate($event)"
               [ngModelOptions]="{ standalone: true }"
               color="primary">
               Use my billing info for shipping
@@ -95,7 +96,7 @@
             [order]="currentOrder$ | async"
           ></app-order-details>
           <div fxLayout="row"
-            fxLayoutAlign="end">
+            fxLayoutAlign="space-between">
             <button matStepperPrevious mat-stroked-button>Previous</button>
             <button mat-raised-button
               color="primary"

@@ -17,10 +17,9 @@
   <ng-container *ngIf="orders$ | async as orders">
     <mat-card *ngIf="orders.length; else noResultTemplate"
       class="orders-card">
-      <mat-card-content fxLayout="row">
+      <mat-card-content>
         <table class="expandable-table orders-table" 
           mat-table
-          fxFlex
           multiTemplateDataRows
           [dataSource]="orders">
 
