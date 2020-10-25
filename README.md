@@ -19,3 +19,5 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 Run `npm run build:docker` to create a docker image, then `npm run start:docker` to start it.
 The docker image uses nginx to serve static content.
+
+Note: when using the Docker image, the port is 80.
