@@ -53,6 +53,7 @@
     <div fxLayout="row"
       fxLayoutAlign="end">
       <button mat-raised-button
+        id="create-order-button"
         color="primary"
         [disabled]="(createOrderEnabled$ | async) === false"
         routerLink="/orders/create">

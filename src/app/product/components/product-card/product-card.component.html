@@ -29,11 +29,11 @@
         fxFlexOrder.lt-sm="1">
         <ng-container *ngIf="product.quantity > 0; else outOfStockTemplate">
           <mat-icon class="success">check_circle_outline</mat-icon>
-          <p>In stock: {{ product.quantity }}</p>
+          <p class="stock-indicator">In stock: {{ product.quantity }}</p>
         </ng-container>
         <ng-template #outOfStockTemplate>
           <mat-icon color="warn">clear</mat-icon>
-          <p>Out of stock</p>
+          <p class="stock-indicator">Out of stock</p>
         </ng-template>
         <p class="price">{{ product.price }}$</p>
       </div>
