@@ -2,6 +2,7 @@
 <div mat-dialog-content>
   <app-simple-input
     label="Quantity"
+    name="quantity"
     [(ngModel)]="quantity"
     [appMin]="0"
     [appMax]="maxQuantity"
@@ -9,5 +10,5 @@
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between">
   <button mat-button [mat-dialog-close]="false">Cancel</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="quantity">Ok</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="quantity" [disabled]="!quantity || quantity < 1">Ok</button>
 </div>

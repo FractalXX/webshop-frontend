@@ -5,6 +5,7 @@
     [formControl]="internalControl"
     [required]="required"
     [type]="type"
+    [name]="name"
   />
   <mat-hint *ngIf="hint">{{ hint }}</mat-hint>
   <mat-error *ngIf="internalControl.errors?.required">

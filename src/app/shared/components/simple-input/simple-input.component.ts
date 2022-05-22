@@ -21,6 +21,7 @@ export class SimpleInputComponent
   @Input() hint: string;
   @Input() type: 'password' | 'text' | 'email' = 'text';
   @Input() required = false;
+  @Input() name = '';
 
   public internalControl = new FormControl();
 
